@@ -67,7 +67,7 @@ int runGlobalBandwidthTest(cl::CommandQueue &queue, cl::Program &prog, device_in
 
     uint64_t maxItems = devInfo.maxAllocSize / sizeof(float) / 2;
     uint64_t numItems = roundToMultipleOf(maxItems, (devInfo.maxWGSize * FETCH_PER_WI * 16), devInfo.globalBWMaxSize);
-
+    // std::cout << "num: " << numItems << std::endl; 
     try
     {
         arr = new float[numItems];
@@ -217,6 +217,7 @@ int runGlobalBandwidthTest(cl::CommandQueue &queue, cl::Program &prog, device_in
     }
     catch (cl::Error &error)
     {
+        UNUSED(error);
         PRINT("Error");
 
         if (arr)
@@ -236,8 +237,6 @@ int main(int argc, char **argv)
     vector<cl::Platform> platforms;
     cl::Platform::get(&platforms);
 
-    // log->xmlOpenTag("gbl_test");
-    // log->xmlAppendAttribs("os", OS_NAME);
 
     for (size_t p = 0; p < platforms.size(); p++)
     {
@@ -260,7 +259,8 @@ int main(int argc, char **argv)
             }
             catch (cl::Error &error)
             {
-                // log->print(TAB TAB "Build Log: " + prog.getBuildInfo<CL_PROGRAM_BUILD_LOG>(devices[d]) + NEWLINE NEWLINE);
+                UNUSED(error);
+                PRINT("Error");
                 continue;
             }
 

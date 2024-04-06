@@ -17,7 +17,6 @@ device_info_t getDeviceInfo(cl::Device &d)
   devInfo.numCUs = (uint)d.getInfo<CL_DEVICE_MAX_COMPUTE_UNITS>();
   vector<size_t> maxWIPerDim;
   maxWIPerDim = d.getInfo<CL_DEVICE_MAX_WORK_ITEM_SIZES>();
-  devInfo.maxWGSize = (uint)maxWIPerDim[0];
 
   // Limiting max work-group size to 256
 #define MAX_WG_SIZE 256

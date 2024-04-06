@@ -28,8 +28,6 @@ else()
   message(STATUS "Selected OpenCL lib ${OpenCL_LIBRARIES}")
 endif()
 
-
-
 # extra libs for static library
 if(UNIX AND ${OpenCL_LIBRARIES} MATCHES "libOpenCL.a")
   set(OpenCL_LIBRARIES ${OpenCL_LIBRARIES} pthread dl)
@@ -39,8 +37,6 @@ endif()
 
 set(CMAKE_CXX_STANDARD "11")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-file(GLOB OpenCL_LIBRARIES "${OpenCL_LIBRARIES_DIR}/*.lib")
 
 set(CLPEAK_SOURCE_FILES
     src/common.cpp
@@ -57,4 +53,3 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR
    CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
   target_compile_options(clpeak PRIVATE -fPIC -Wall -Wextra -Wno-unused-parameter)
 endif()
-
